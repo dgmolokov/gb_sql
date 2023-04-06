@@ -36,11 +36,12 @@ alter table _regions
   drop title_lv,
   drop title_cz;
 
+delete from _cities where region_id is null;
 alter table _cities
   change city_id id bigint auto_increment,
   change title_ru title varchar(200) not null,
   modify country_id bigint not null,
-  modify region_id bigint,
+  modify region_id bigint not null,
   add foreign key (country_id) references _countries (id),
   add foreign key (region_id) references _regions (id),
   add index `cities_title_index` (title),
